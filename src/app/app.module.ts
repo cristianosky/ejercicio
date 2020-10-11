@@ -11,7 +11,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormComponent } from './pages/form/form.component';
 import { FormsComponent } from './pages/forms/forms.component';
-import { ActualizarComponent } from './pages/actualizar/actualizar.component';
 import { PasswordValidationDirective } from './validations/password-validation.directive';
 import { EdadValidateDirective } from './validations/edad-validate.directive';
 import { ConfirmarPassDirective } from './validations/confirmar-pass.directive';
@@ -20,13 +19,16 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatTableModule} from '@angular/material/table';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     FormComponent,
     FormsComponent,
-    ActualizarComponent,
     PasswordValidationDirective,
     EdadValidateDirective,
     ConfirmarPassDirective,
@@ -45,7 +47,9 @@ import {MatIconModule} from '@angular/material/icon';
     MatDatepickerModule,
     MatInputModule,
     MatNativeDateModule,
-    MatIconModule  
+    MatIconModule,
+    MatButtonModule,
+    MatTableModule
   ],
   providers: [MatDatepickerModule],
   bootstrap: [AppComponent]

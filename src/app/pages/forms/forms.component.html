@@ -1,0 +1,129 @@
+<h4>Ejercicio <small> Edwin </small></h4>
+<hr>
+<div class="row mb-5">
+    <div class="col">
+
+        <button mat-raised-button color="primary" (click)="openDialog(false, null)">
+            <i class="fa fa-plus"></i>
+            Agregar Usuario
+        </button>
+    </div>
+</div>
+
+<!-- 
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Fecha de nacimiento</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Contraseña</th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let form of formularios; let i = index">
+            <th scope="row">{{ i+1}}</th>
+            <td>{{form.nombre}}</td>
+            <td>{{form.apellido}}</td>
+            <td>{{form.fechan | date}}</td>
+            <td>{{form.correo}}</td>
+            <td>{{form.contrasena}}</td>
+            <td>
+                <button mat-mini-fab color="primary" class="mr-2" [routerLink]="['/form', form.id]">
+                    <i class="fa fa-pen"></i>
+                </button>
+
+                <button mat-mini-fab color="warn" (click)="borrarf( form )">
+                    <mat-icon>delete</mat-icon>
+                </button>
+
+            </td>
+        </tr>
+    </tbody>
+</table> -->
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="#">
+        <th mat-header-cell *matHeaderCellDef> # </th>
+        <td mat-cell *matCellDef="let element; let i = index"> {{i + 1}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="apellido">
+        <th mat-header-cell *matHeaderCellDef> Apellido </th>
+        <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="fechan">
+        <th mat-header-cell *matHeaderCellDef> Fecha de nacimiento </th>
+        <td mat-cell *matCellDef="let element"> {{element.fechan | date}} </td>
+    </ng-container>
+    <ng-container matColumnDef="correo">
+        <th mat-header-cell *matHeaderCellDef> Correo </th>
+        <td mat-cell *matCellDef="let element"> {{element.correo}} </td>
+    </ng-container>
+    <ng-container matColumnDef="contrasena">
+        <th mat-header-cell *matHeaderCellDef>Contraseña</th>
+        <td mat-cell *matCellDef="let element">
+            <span *ngIf="element.mostrarpass">{{element.contrasena}}</span>
+            <span *ngIf="!element.mostrarpass">**********</span>
+            <mat-icon class="ojo ml-1" (click)="hidepass(element)">{{element.mostrarpass? 'visibility' : 'visibility_off'}}</mat-icon>
+        </td>
+        <!-- <td mat-cell *matCellDef="let element" *ngIf="element.mostrarpass"> ********* </td> -->
+    </ng-container>
+    <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let element">
+
+            <button mat-mini-fab color="primary" class="mr-2" (click)="openDialog(true, element.id)">
+            <i class="fa fa-pen"></i>
+            </button>
+
+            <button mat-mini-fab color="warn" (click)="borrarf( element )">
+            <mat-icon>delete</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<div *ngIf="!cargando && dataSource.length === 0" class="alert alert-warning text-center mt-3 animated fadeIn faster">
+    <h4 class="alert-heading">
+        No hay registro
+    </h4>
+    <p>
+        <i class="fa fa-exclamation fa-2x"></i>
+    </p>
+
+</div>
+
+<div *ngIf="cargando" class="alert alert-info text-center mt-3 animated fadeIn faster">
+    <h4 class="alert-heading">
+        Cargando..
+    </h4>
+    <p>
+        <i class="fa fa-sync-alt fa-spin fa-2x"></i>
+    </p>
+    <p>
+        Espere porfavor..
+    </p>
+</div>
