@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators'
 })
 export class FirebaseService {
 
-  private url = 'https://edwin-puto.firebaseio.com'
+   private url = 'https://crudapp-273fb.firebaseio.com'
 
   constructor( private http: HttpClient) { }
 
